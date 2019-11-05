@@ -2,7 +2,7 @@
 # Name:
 #	snpp
 # PURPOSE:
-#	calculate the S/N per pixel for CSST and simulate a noisy spectrum for any given template.
+#	calculate the noise and generate a simulated spectrum with noise for any given template or spectrum.
 #IUTPUTS:
 #   targetmag      the surface brightness of the target you want to calculate the S/N (defult: 17 mag/arcsec^2)
 #   galtpl         the filename of star-forming galaxy template you want to use.
