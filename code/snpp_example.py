@@ -67,7 +67,7 @@ def snpp_model(s):
     elif s==2:
         
         #select put in wave and flux    
-        filee=fits.open('MockGal-M21Z0.01-FOV6R0.1-W350n1000n.fits')
+        filee=fits.open('MockGal-M21Z0.01-W350n1000n.fits')
         fluxx=filee[1].data  #erg/s/A/cm2
         wavee=filee[2].data    #A
 
