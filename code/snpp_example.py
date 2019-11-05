@@ -68,7 +68,7 @@ def snpp_model(s):
         
         #select put in wave and flux    
         filee=fits.open('MockGal-M21Z0.01-FOV6R0.1-W350n1000n.fits')
-        fluxx=np.sum(np.sum(filee[1].data[:20,:20],1),0)  #erg/s/A/cm2
+        fluxx=filee[1].data  #erg/s/A/cm2
         wavee=filee[2].data    #A
 
         result=inwf.input_wave_flux(wavee,fluxx)
