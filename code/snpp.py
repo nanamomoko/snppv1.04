@@ -143,8 +143,8 @@ class snpp(object):
         # some less basic parameters, may change, but not often
         
         throughput=pd.read_csv('../obs/IFU_throughput.dat',sep='\s+',header=None,skiprows=1)
-        lambdaq=np.array(throughput[8])*10 # A
-        qtot=np.array(throughput[9]) #; throughput of the whole system,
+        lambdaq=np.array(throughput[0])*10 # A
+        qtot=np.array(throughput[1]) #; throughput of the whole system,
  
 
         #;assuming the total throughput cannot reach the theory value, 0.3 is the upper limit. 
