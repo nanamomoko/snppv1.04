@@ -61,9 +61,9 @@ def snpp_model(s):
     
         #select model and magnitude
         targetmag=17.
-        galtpl='SFgal_texp_FeH0_tau5_Ew10.fits'
+        galtpl='../obs/SFgal_tpl/SFgal_texp_FeH0_tau5_Ew10.fits'
         deltal=1.755555
-        filtera='sdss_g0.par'
+        filtera='../obs/filters/sdss_g0.par'
         sampling=2.0
 
         result=inmg.input_mag_model(targetmag,galtpl,deltal, filtera,sampling)
