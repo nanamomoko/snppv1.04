@@ -75,7 +75,7 @@ class snpp(object):
                  filename=False,readnoise=4.0,
                  fovp=0.2,npixel_width=2.0,
                  obstime=300,repeatnum=1.0,skyr=22.5, qinput=1.0,
-                 specsample=2.0,skyperpixel=False):
+                 skyperpixel=False):
 
         #Do extensive checking of possible input errors
         #
@@ -115,8 +115,8 @@ class snpp(object):
         iskyr0=skyr  # in Johnson V mag/arcsec^2 unit
         print('skyv:', iskyr0)
         
-        sampling=specsample
-        print('specsample:',sampling)
+        sampling=2.0
+        #print('specsample:',sampling)
         
         delta_lambda=1.755555
         
