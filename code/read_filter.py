@@ -3,7 +3,7 @@ import pandas as pd
 ################################################################################
 def filteraa(filtera):
     #load the filters          
-    filtersel=filtera #'../sdss_g0.par'            
+    filtersel=filtera #'sdss_g0.par'            
     filterpath='./'
     filterfile=filterpath+filtersel   # ;fluxfilter: max=1, min=0, no particular unit
     print(filterfile)   
