@@ -7,7 +7,6 @@
 #   targetmag      the surface brightness of the target you want to calculate the S/N (defult: 17 mag/arcsec^2)
 #   galtpl         the filename of star-forming galaxy template you want to use.
 #   filtera         the filter you chosed to estimate the S/N (defult: sdss_g)
-#   specsample     pixels per spectral resolution element (defult: 2)
 #   readnoise      read noise, in e/pix. (defult: 5.0)
 #   fovp           diameter of fiber (or spaxel) in arcsec (defult: 0.2 arcsec)
 #   npixel_width   the width of the spectrum on the CCD (defult: 2.0)
@@ -45,7 +44,7 @@ def snpp_example():
     filename='../results/wf_weak_30020_25.fits'
     
     ss=snpp(wavearr=wavearr,galflux=galflux,
-            filename=filename,specsample=2.0,
+            filename=filename,
             readnoise=5.0,fovp=0.2,npixel_width=2.0,
             obstime=300,repeatnum=20,skyr=22.5,qinput=1.0, 
             skyperpixel=True)
