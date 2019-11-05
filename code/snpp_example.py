@@ -37,11 +37,11 @@ import inmg
 
 def snpp_example(): 
     
-    select=2 # 1 or 2
+    select=1 # 1 or 2
     resu=snpp_model(select)
     wavearr,galflux=resu[0],resu[1]
     
-    filename='../results/wf_weak_30020_25.fits'
+    filename='../results/mg_weak_30020_25.fits'
     
     ss=snpp(wavearr=wavearr,galflux=galflux,
             filename=filename,
