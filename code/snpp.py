@@ -122,23 +122,7 @@ class snpp(object):
         
         #####################################################################
         
-        resulte=read_filter.filteraa('../obs/filters/sdss_r0.par')
-        wavefilter=resulte[0]
-        fluxfilter=resulte[1]
-        vmin=resulte[2]
-        vmax=resulte[3]
-        filtereff=resulte[4]
-        FWHMmin = resulte[5]
-        FWHMmax = resulte[6]
         
-        # select out the array of r band filter
-        ii=np.logical_and(wavearr >= vmin, wavearr <= vmax)
-        wavetmp2=wavearr[ii]
-        x=np.interp(wavetmp2,wavefilter,fluxfilter)
-        integratef4=x*wavetmp2    
-        integconst=simps(integratef4,wavetmp2) # int(lambda*Rlambda*dlambda)
-        
-        #####################################################################
         
         # some less basic parameters, may change, but not often
         
@@ -161,46 +145,13 @@ class snpp(object):
         ##############################################################################
         
         # SKY
-        #define r band sky brightness
-        
-        lambdar=filtereff   #in A
-
-        #sky brightness corresponding to this sky magnitude
-        iskyr0_jy=3631.0*10**(-iskyr0/2.5+3.0)  # sky flux in V in mJy/arcsec^2 unit
-        iskyr0_nm=iskyr0_jy*3.0/(lambdar/100.0)**2 #sky flux in V in 10^(-12)erg/s/cm^2/A (/arcsec^2 ?)
-
-        #readin the ground sky spectrum 
-        skybg_50=pd.read_csv('../obs/skybg_50_10.dat',sep='\s+',header=None,skiprows=14)
-        wavesky=np.array(skybg_50[0])*10 #in A
-        fluxsky1=np.array(skybg_50[1])/10 #phot/s/A/arcsec^2/m^2
-        fluxsky2=fluxsky1/wavesky*1.98 #change the sky flux unit to 10^(-12)erg/s/cm^2/A/arcsec^2
-        
-
-        #This fluxsky is in unit of phot/s/A/arcsec^2/m^2, to convert it to F_lambda/arcsec^2, 
-        #need to do fluxsky(phot/s/A/arcsec^2/m^2)*h(6.625*10^{-27}erg.s)*nu(1/s)*10{-4}(m^2/cm^2)
-        #=fluxsky*c(3.0*10^{18}A/s)/lambda(A)*6.6*10{-31} erg/s/cm^2/A/arcsec^2
-        #=fluxsky/lambda*1.98*10^{-12}erg/s/cm^2/A/arcsec^2 
-
-        #find out the normalization of the sky,
-        ii=np.logical_and(wavesky >= vmin, wavesky <= vmax)
-        wavetmp=wavesky[ii]
-        fluxtmp=fluxsky1[ii]
-
-        x=np.interp(wavetmp,wavefilter,fluxfilter)
-        vfluxtmp=x*fluxtmp*1.98  
-        skyintegrate=simps( vfluxtmp,wavetmp)
-        skynorm=iskyr0_nm*integconst/skyintegrate 
-        fluxsky3=np.interp(wavearr,wavesky,fluxsky2)
-        fluxsky=fluxsky3*skynorm   
-        # get the sky spectrum in wavearr grid, the unit should now be the same as fluxvega: 10^(-12) erg/s/A/cm^2  (/arcsec^2 ?)
-
-        fluxskypp=fluxsky
-        
-        #a second way of estimating the Sky, if know the sky electron number per pixel
+ 
         
         if self.skyperpixel :
+		#print(1)
                 #since the numbers are given by the main survey, 
                 #our detected Sky electron will be less, so scale a rough factor of 0.9
+		fluxskypp=np.zeros(len(wavearr))
                 scaletemp=0.9
                 ii=np.logical_and(wavearr >= 2550, wavearr <= 4000)
                 counta=len(np.where(ii==1)[0])
@@ -215,9 +166,61 @@ class snpp(object):
                 countd=len(ii)
                 fluxskypp[ii]=0.301/countd 
                 fluxskypp=fluxskypp/0.074**2*fov2*scaletemp
-        
-                 
-        
+		
+	else:
+		#print(2)
+		resulte=read_filter.filteraa('../obs/filters/sdss_r0.par')
+		wavefilter=resulte[0]
+		fluxfilter=resulte[1]
+		vmin=resulte[2]
+		vmax=resulte[3]
+		filtereff=resulte[4]
+		FWHMmin = resulte[5]
+		FWHMmax = resulte[6]
+
+		# select out the array of r band filter
+		ii=np.logical_and(wavearr >= vmin, wavearr <= vmax)
+		wavetmp2=wavearr[ii]
+		x=np.interp(wavetmp2,wavefilter,fluxfilter)
+		integratef4=x*wavetmp2    
+		integconst=simps(integratef4,wavetmp2) # int(lambda*Rlambda*dlambda)
+
+		#####################################################################
+		
+		#define r band sky brightness
+
+		lambdar=filtereff   #in A
+
+		#sky brightness corresponding to this sky magnitude
+		iskyr0_jy=3631.0*10**(-iskyr0/2.5+3.0)  # sky flux in V in mJy/arcsec^2 unit
+		iskyr0_nm=iskyr0_jy*3.0/(lambdar/100.0)**2 #sky flux in V in 10^(-12)erg/s/cm^2/A (/arcsec^2 ?)
+
+		#readin the ground sky spectrum 
+		skybg_50=pd.read_csv('../obs/skybg_50_10.dat',sep='\s+',header=None,skiprows=14)
+		wavesky=np.array(skybg_50[0])*10 #in A
+		fluxsky1=np.array(skybg_50[1])/10 #phot/s/A/arcsec^2/m^2
+		fluxsky2=fluxsky1/wavesky*1.98 #change the sky flux unit to 10^(-12)erg/s/cm^2/A/arcsec^2
+
+
+		#This fluxsky is in unit of phot/s/A/arcsec^2/m^2, to convert it to F_lambda/arcsec^2, 
+		#need to do fluxsky(phot/s/A/arcsec^2/m^2)*h(6.625*10^{-27}erg.s)*nu(1/s)*10{-4}(m^2/cm^2)
+		#=fluxsky*c(3.0*10^{18}A/s)/lambda(A)*6.6*10{-31} erg/s/cm^2/A/arcsec^2
+		#=fluxsky/lambda*1.98*10^{-12}erg/s/cm^2/A/arcsec^2 
+
+		#find out the normalization of the sky,
+		ii=np.logical_and(wavesky >= vmin, wavesky <= vmax)
+		wavetmp=wavesky[ii]
+		fluxtmp=fluxsky1[ii]
+
+		x=np.interp(wavetmp,wavefilter,fluxfilter)
+		vfluxtmp=x*fluxtmp*1.98  
+		skyintegrate=simps( vfluxtmp,wavetmp)
+		skynorm=iskyr0_nm*integconst/skyintegrate 
+		fluxsky3=np.interp(wavearr,wavesky,fluxsky2)
+		fluxsky=fluxsky3*skynorm   
+		# get the sky spectrum in wavearr grid, the unit should now be the same as fluxvega: 10^(-12) erg/s/A/cm^2  (/arcsec^2 ?)
+
+		fluxskypp=fluxsky                
 
         ##########################################################################
         
