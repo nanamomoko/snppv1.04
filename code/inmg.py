@@ -23,7 +23,7 @@ def input_mag_model(targetmag,galtpl,filtera):
     print('delta_lambda:', delta_lambda)
 
     narray=int((10000.0-3500.0)/delta_lambda) 
-    wavearr=3500.0+delta_lambda*pl.frange(narray-1)
+    wavearr=3500.0+delta_lambda*np.arange(narray-1)
     # select out the array of V band filter
     ii=np.logical_and(wavearr >= vmin, wavearr <= vmax)
     wavetmp2=wavearr[ii]
