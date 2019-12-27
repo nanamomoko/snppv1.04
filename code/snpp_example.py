@@ -45,7 +45,7 @@ def snpp_example():
     
     ss=snpp(wavearr=wavearr,galflux=galflux,
             filename=filename,
-            readnoise=5.0,fovp=0.2,npixel_width=2.0,
+            readnoise=5.5,fovp=0.2,npixel_width=2.0,
             obstime=300,repeatnum=20,skyr=22.5,qinput=1.0, 
             skyperpixel=True)
     
@@ -57,7 +57,7 @@ def snpp_model(s):
     
         #select model and magnitude
         targetmag=17.
-        galtpl='../obs/SFgal_tpl/SFgal_texp_FeH0_tau5_Ew10.fits'
+        galtpl='../obs/SFgal_tpl/SFgal_texp_FeH0_tau5_Ew5.fits'
         filtera='../obs/filters/sdss_g0.par'
 
         result=inmg.input_mag_model(targetmag,galtpl,filtera)
