@@ -45,7 +45,7 @@ def input_mag_model(targetmag,galtpl,filtera):
     print('tplfile:',tplfile)   
 
     sfgal=fits.open(tplfile)
-    wavegal=sfgal[1].data['wave'] # A
+    wavegal=sfgal[1].data['wavelength'] # A
     galflux2=sfgal[1].data['flux']
     galflux1=np.interp(wavearr,wavegal,galflux2)
 
