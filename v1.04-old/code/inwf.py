@@ -14,7 +14,7 @@ def input_wave_flux(wave,flux):
     flux=flux
     delta_lambda=1.755555
     narray=int((wave[-1]-wave[0])/delta_lambda) 
-    wavearr=wave[0]+delta_lambda*pl.frange(narray-1)
+    wavearr=wave[0]+delta_lambda*np.float64(np.arange(narray))
         
     galflux=np.interp(wavearr,wave,flux)      #erg/s/A/cm2
     
