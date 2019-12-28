@@ -1,7 +1,6 @@
 from astropy.io import fits
 import numpy as np
 import pandas as pd
-import pylab as pl
 from scipy.integrate import simps
 import read_filter
 #######################################################################################################
