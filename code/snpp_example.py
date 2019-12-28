@@ -28,6 +28,7 @@
 from __future__ import print_function
 from astropy.io import fits
 import numpy as np
+import pandas as pd
 from snpp import *
 
 #################################################################
