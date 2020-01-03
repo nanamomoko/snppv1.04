@@ -258,13 +258,16 @@ class snpp(object):
             scaletemp=0.9
             ii=np.logical_and(wavearr >= 2550, wavearr <= 4000)
             counta=len(np.where(ii==1)[0])
-            fluxskypp[ii]=0.028/counta  
+            if counta>0:
+                fluxskypp[ii]=0.028/counta  
             ii=np.logical_and(wavearr >= 4000, wavearr <= 6000)
             countb=len(np.where(ii==1)[0])
-            fluxskypp[ii]=0.229/countb  
+            if countb>0:
+                fluxskypp[ii]=0.229/countb  
             ii=np.logical_and(wavearr >= 6000, wavearr <= 9000)
             countc=len(np.where(ii==1)[0])
-            fluxskypp[ii]=0.301/countc  
+            if countc>0:
+                fluxskypp[ii]=0.301/countc  
             ii=np.where(wavearr >= 9000)[0]
             countd=len(ii)
             if countd>0:
