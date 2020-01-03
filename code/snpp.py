@@ -267,7 +267,8 @@ class snpp(object):
             fluxskypp[ii]=0.301/countc  
             ii=np.where(wavearr >= 9000)[0]
             countd=len(ii)
-            fluxskypp[ii]=0.301/countd 
+            if countd>0:
+                fluxskypp[ii]=0.301/countd 
             fluxskypp=fluxskypp/0.074**2*fov2*scaletemp
 
         else:
