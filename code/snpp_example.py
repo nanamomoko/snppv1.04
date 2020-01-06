@@ -55,7 +55,7 @@ def snpp_model(s):
     if s==1:
     
         #select model and magnitude
-        targetmag=17.
+        targetmag=17.  #mag/arcsec^2
         galtpl='../obs/SFgal_tpl/SFgal_texp_FeH0_tau5_Ew5.fits'
         filtera='../obs/filters/sdss_g0.par'
 
