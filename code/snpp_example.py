@@ -30,6 +30,7 @@ from astropy.io import fits
 import numpy as np
 import pandas as pd
 from snpp import *
+import os
 
 #################################################################
 ##################################################################
@@ -61,18 +62,18 @@ def snpp_model(s):
 
         result=input_mag_model(targetmag,galtpl,filtera)
         wavearr=result[0]   #A
-        galflux=result[1]   #10^-12 erg/s/A/cm2   
+        galflux=result[1]   #10^-12 erg/s/A/cm2 /arcsec^2  
 
     elif s==2:
         
         #select put in wave and flux    
         filee=fits.open('MockGal-M21Z0.01-W350n1000n.fits')
-        fluxx=filee[1].data  #erg/s/A/cm2
+        fluxx=filee[1].data  #erg/s/A/cm2/arcsec^2
         wavee=filee[2].data    #A
 
         result=input_wave_flux(wavee,fluxx)
         wavearr=result[0]  #A
-        galflux=result[1]  #10^-12 erg/s/A/cm2
+        galflux=result[1]  #10^-12 erg/s/A/cm2/arcsec^2
     
     return wavearr,galflux
 
