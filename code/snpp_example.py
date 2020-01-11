@@ -56,13 +56,13 @@ def snpp_model(s):
     if s==1:
     
         #select model and magnitude
-        targetmag=17.  #mag/arcsec^2
+        targetmag=17.  #mag/arcsec2
         galtpl='../obs/SFgal_tpl/SFgal_texp_FeH0_tau5_Ew5.fits'
         filtera='../obs/filters/sdss_g0.par'
 
         result=input_mag_model(targetmag,galtpl,filtera)
         wavearr=result[0]   #A
-        galflux=result[1]   #10^-12 erg/s/A/cm2 /arcsec^2  
+        galflux=result[1]   #10^-12 erg/s/A/cm2 /arcsec2  
 
     elif s==2:
         
@@ -73,7 +73,7 @@ def snpp_model(s):
 
         result=input_wave_flux(wavee,fluxx)
         wavearr=result[0]  #A
-        galflux=result[1]  #10^-12 erg/s/A/cm2/arcsec^2
+        galflux=result[1]  #10^-12 erg/s/A/cm2/arcsec2
     
     return wavearr,galflux
 
