@@ -77,7 +77,6 @@ def snpp_model(s):
     
     return wavearr,galflux
 
-
 #########################################################
 
 if __name__=='__main__':
