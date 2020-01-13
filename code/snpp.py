@@ -192,7 +192,7 @@ class snpp(object):
         self.readnoise=readnoise
         self.npixel_width=npixel_width
         self.skyperpixel=skyperpixel
-        
+        self.filename=filename
         ###########################################################################
         #some basic unchanged parameters     
         d=200        # diameter of the telescope, in cm unit
