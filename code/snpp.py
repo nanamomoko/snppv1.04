@@ -390,24 +390,25 @@ class snpp(object):
   
     ############################################################################################
         self.bb=lista
-        # write file
-        namedat=np.array(['lambda','S/N','tar_flux','tot_noise','sc_noise', \
-                          'sys_noise', 'readnoise','dark_noise', 'sky_noise', 'mockgal'])
-        unit=np.array(['A', ' ','1e-13 erg/s/cm2/A',\
-                       '#e','#e','#e','#e','#e','#e', '1e-13 erg/s/cm2/A'])
-        
-        hdr=fits.Header()
-        for i in range(len(namedat)):
-            hdr[str(i)]=unit[i]
-        hun1=fits.PrimaryHDU(header=hdr)
-        hun2=fits.BinTableHDU.from_columns([fits.Column(name=namedat[i],array=np.array(lista[:,i]),format='1E') for i in range(len(namedat))])
-        hdulist = fits.HDUList([hun1,hun2])
-        '''
-        if(os.path.exists('./noise_'+str(filtersel)+'_'+str(galtpl)+'.fits'))==1:
-            os.remove('./noise_'+str(filtersel)+'_'+str(galtpl)+'.fits')
-        '''
-        print('output filt:',filename)
-        hdulist.writeto('./'+filename)
+        if self.filename == True:
+            # write file
+            namedat=np.array(['lambda','S/N','tar_flux','tot_noise','sc_noise', \
+                              'sys_noise', 'readnoise','dark_noise', 'sky_noise', 'mockgal'])
+            unit=np.array(['A', ' ','1e-13 erg/s/cm2/A',\
+                           '#e','#e','#e','#e','#e','#e', '1e-13 erg/s/cm2/A'])
+
+            hdr=fits.Header()
+            for i in range(len(namedat)):
+                hdr[str(i)]=unit[i]
+            hun1=fits.PrimaryHDU(header=hdr)
+            hun2=fits.BinTableHDU.from_columns([fits.Column(name=namedat[i],array=np.array(lista[:,i]),format='1E') for i in range(len(namedat))])
+            hdulist = fits.HDUList([hun1,hun2])
+            '''
+            if(os.path.exists('./noise_'+str(filtersel)+'_'+str(galtpl)+'.fits'))==1:
+                os.remove('./noise_'+str(filtersel)+'_'+str(galtpl)+'.fits')
+            '''
+            print('output filt:',filename)
+            hdulist.writeto('./'+filename)
         
         #####################################################################
     ############################################################################
