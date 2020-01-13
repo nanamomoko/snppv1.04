@@ -48,7 +48,7 @@ def snpp_example():
             readnoise=5.5,fovp=0.2,npixel_width=2.0,
             obstime=300,repeatnum=20,skyr=22.5,qinput=1.0, 
             skyperpixel=True)
-    
+    #re=ss.fits()
 ################################################################
 
 def snpp_model(s):
