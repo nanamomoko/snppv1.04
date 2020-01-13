@@ -390,7 +390,7 @@ class snpp(object):
   
     ############################################################################################
         self.bb=lista
-        if self.filename == True:
+        if self.filename:
             # write file
             namedat=np.array(['lambda','S/N','tar_flux','tot_noise','sc_noise', \
                               'sys_noise', 'readnoise','dark_noise', 'sky_noise', 'mockgal'])
